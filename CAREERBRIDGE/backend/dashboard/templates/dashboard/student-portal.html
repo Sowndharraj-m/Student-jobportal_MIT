@@ -686,7 +686,7 @@
                             Get your resume reviewed by HR professionals.
                             Improve structure, keywords, and ATS score in real-time.
                         </div>
-                        <button class="guidance-btn">Schedule Review</button>
+                        <button class="guidance-btn" onclick="openReviewModal()">Schedule Review</button>
                     </div>
 
                     <div class="guidance-card">
@@ -696,7 +696,7 @@
                             Final year student? Get a full placement roadmap —
                             companies to target, skills to learn, and interview plan.
                         </div>
-                        <button class="guidance-btn">Get Roadmap</button>
+                        <button class="guidance-btn" onclick="openRoadmapModal()">Get Roadmap</button>
                     </div>
 
                     <div class="guidance-card">
@@ -706,7 +706,7 @@
                             Planning for MS / MBA / GATE? Get guidance on exams,
                             SOP writing, university selection, and scholarships.
                         </div>
-                        <button class="guidance-btn">Talk to Advisor</button>
+                        <button class="guidance-btn" onclick="openAdvisorModal()">Talk to Advisor</button>
                     </div>
 
                 </div>
@@ -726,7 +726,7 @@
                     </div>
                     <h3 style="margin-top: 16px;">Frontend Intern</h3>
                     <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">Zoho Corp • Chennai</p>
-                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Apply with
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" onclick="openJobModal('Frontend Intern', 'Zoho Corp')">Apply with
                         CareerBridge</button>
                 </div>
                 <div class="card">
@@ -736,7 +736,7 @@
                     </div>
                     <h3 style="margin-top: 16px;">Cloud Support Associate</h3>
                     <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">AWS India • Remote</p>
-                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">Apply with
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" onclick="openJobModal('Cloud Support Associate', 'AWS India')">Apply with
                         CareerBridge</button>
                 </div>
             </div>
@@ -788,6 +788,109 @@
                     <small style="color: var(--muted);">Watching Now</small>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- MENTOR MODAL -->
+    <div id="mentor-modal"
+        style="display:none; position:fixed; inset:0; background:rgba(10, 14, 26, 0.95); backdrop-filter: blur(10px); z-index:2000; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="auth-card" style="max-width: 500px; text-align: left; position: relative;">
+            <button onclick="closeMentorModal()" style="position: absolute; top: 20px; right: 20px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer;">&times;</button>
+            <h3 style="font-family: var(--font-head); font-size: 24px; margin-bottom: 8px; color: var(--accent);">Book Mentor Session</h3>
+            <p style="color: var(--muted); margin-bottom: 24px;">Schedule a 1-on-1 career guidance session with an industry expert.</p>
+            
+            <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px; color: var(--text);">Select Mentor Role</label>
+            <select style="width: 100%; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 16px; outline: none;">
+                <option value="software">Software Engineering</option>
+                <option value="data">Data Science</option>
+                <option value="product">Product Management</option>
+                <option value="design">UI/UX Design</option>
+            </select>
+
+            <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px; color: var(--text);">Preferred Date & Time</label>
+            <input type="datetime-local" style="width: 100%; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 24px; outline: none; color-scheme: dark;" />
+
+            <button class="btn btn-primary" style="width: 100%;" onclick="confirmMentorSession(event);">Confirm Booking</button>
+        </div>
+    </div>
+
+    <!-- REVIEW MODAL -->
+    <div id="review-modal"
+        style="display:none; position:fixed; inset:0; background:rgba(10, 14, 26, 0.95); backdrop-filter: blur(10px); z-index:2000; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="auth-card" style="max-width: 500px; text-align: left; position: relative;">
+            <button onclick="closeReviewModal()" style="position: absolute; top: 20px; right: 20px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer;">&times;</button>
+            <h3 style="font-family: var(--font-head); font-size: 24px; margin-bottom: 8px; color: var(--accent);">Schedule Resume Review</h3>
+            <p style="color: var(--muted); margin-bottom: 24px;">Get live feedback from an HR professional on your resume.</p>
+            
+            <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px; color: var(--text);">Upload Current Resume</label>
+            <input type="file" style="width: 100%; padding: 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 16px; outline: none; color-scheme: dark;" />
+
+            <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px; color: var(--text);">Preferred Date & Time</label>
+            <input type="datetime-local" style="width: 100%; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 24px; outline: none; color-scheme: dark;" />
+
+            <button class="btn btn-primary" style="width: 100%;" onclick="confirmAction(event, 'Schedule Review', 'Scheduled Successfully');">Confirm Schedule</button>
+        </div>
+    </div>
+
+    <!-- ROADMAP MODAL -->
+    <div id="roadmap-modal"
+        style="display:none; position:fixed; inset:0; background:rgba(10, 14, 26, 0.95); backdrop-filter: blur(10px); z-index:2000; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="auth-card" style="max-width: 500px; text-align: left; position: relative;">
+            <button onclick="closeRoadmapModal()" style="position: absolute; top: 20px; right: 20px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer;">&times;</button>
+            <h3 style="font-family: var(--font-head); font-size: 24px; margin-bottom: 8px; color: var(--accent);">Get Placement Roadmap</h3>
+            <p style="color: var(--muted); margin-bottom: 24px;">Request a personalized strategy plan for your placements.</p>
+            
+            <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px; color: var(--text);">Target Job Role</label>
+            <input type="text" placeholder="e.g. SDE, Data Analyst, Product Manager" style="width: 100%; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 16px; outline: none;" />
+
+            <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px; color: var(--text);">Target Companies</label>
+            <input type="text" placeholder="e.g. Google, Amazon, Microsoft" style="width: 100%; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 24px; outline: none;" />
+
+            <button class="btn btn-primary" style="width: 100%;" onclick="confirmAction(event, 'Request Roadmap', 'Request Sent');">Request Roadmap</button>
+        </div>
+    </div>
+
+    <!-- ADVISOR MODAL -->
+    <div id="advisor-modal"
+        style="display:none; position:fixed; inset:0; background:rgba(10, 14, 26, 0.95); backdrop-filter: blur(10px); z-index:2000; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="auth-card" style="max-width: 500px; text-align: left; position: relative;">
+            <button onclick="closeAdvisorModal()" style="position: absolute; top: 20px; right: 20px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer;">&times;</button>
+            <h3 style="font-family: var(--font-head); font-size: 24px; margin-bottom: 8px; color: var(--accent);">Talk to Advisor</h3>
+            <p style="color: var(--muted); margin-bottom: 24px;">Get specialized guidance on higher studies (MS, MBA, GATE).</p>
+            
+            <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px; color: var(--text);">Study Path</label>
+            <select style="width: 100%; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 16px; outline: none;">
+                <option value="ms">MS (Master of Science)</option>
+                <option value="mba">MBA</option>
+                <option value="gate">GATE Preparation</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px; color: var(--text);">Preferred Destination / Exam</label>
+            <input type="text" placeholder="e.g. USA, UK, IITs" style="width: 100%; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 24px; outline: none;" />
+
+            <button class="btn btn-primary" style="width: 100%;" onclick="confirmAction(event, 'Connect with Advisor', 'Request Submitted');">Connect with Advisor</button>
+        </div>
+    </div>
+
+    <!-- JOB APPLICATION MODAL -->
+    <div id="job-modal"
+        style="display:none; position:fixed; inset:0; background:rgba(10, 14, 26, 0.95); backdrop-filter: blur(10px); z-index:2000; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="auth-card" style="max-width: 500px; text-align: left; position: relative;">
+            <button onclick="closeJobModal()" style="position: absolute; top: 20px; right: 20px; background:none; border:none; color:var(--muted); font-size:24px; cursor:pointer;">&times;</button>
+            <h3 style="font-family: var(--font-head); font-size: 24px; margin-bottom: 8px; color: var(--accent);">Apply for Job</h3>
+            <p style="color: var(--muted); margin-bottom: 24px;">Submit your CareerBridge profile directly to <span id="job-modal-company" style="color:var(--text); font-weight:600;"></span> for the <span id="job-modal-role" style="color:var(--text); font-weight:600;"></span> position.</p>
+            
+            <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px; color: var(--text);">Select Resume to Attach</label>
+            <select style="width: 100%; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 16px; outline: none;">
+                <option value="default">Use Default Student Profile</option>
+                <option value="custom">Upload New Resume for this Role</option>
+            </select>
+
+            <label style="display:block; margin-bottom:8px; font-weight:600; font-size:14px; color: var(--text);">Why are you a good fit? (Optional)</label>
+            <textarea placeholder="Write a short cover letter..." style="width: 100%; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: #fff; margin-bottom: 24px; outline: none; min-height: 80px; resize: vertical; font-family: var(--font-body);"></textarea>
+
+            <button class="btn btn-primary" style="width: 100%;" onclick="confirmAction(event, 'Submit Application', 'Application Sent!');">Submit Application</button>
         </div>
     </div>
 
@@ -873,6 +976,95 @@
             if (player && player.stopVideo) { player.stopVideo(); }
         }
 
+        function openMentorModal() {
+            document.getElementById('mentor-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMentorModal() {
+            document.getElementById('mentor-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function confirmMentorSession(e) {
+            const btn = e ? e.target : event.target;
+            const originalText = btn.innerText;
+            btn.innerText = "Booking...";
+            
+            setTimeout(() => {
+                btn.innerText = "✓ Booked Successfully";
+                btn.style.background = "var(--accent3)"; // Success color
+                btn.style.color = "#fff";
+                
+                setTimeout(() => {
+                    closeMentorModal();
+                    btn.innerText = originalText;
+                    btn.style.background = ""; // Restore original style
+                    btn.style.color = "";
+                }, 1500);
+            }, 1000);
+        }
+
+        function openReviewModal() {
+            document.getElementById('review-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReviewModal() {
+            document.getElementById('review-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openRoadmapModal() {
+            document.getElementById('roadmap-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRoadmapModal() {
+            document.getElementById('roadmap-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openAdvisorModal() {
+            document.getElementById('advisor-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAdvisorModal() {
+            document.getElementById('advisor-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openJobModal(role, company) {
+            document.getElementById('job-modal-role').innerText = role;
+            document.getElementById('job-modal-company').innerText = company;
+            document.getElementById('job-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeJobModal() {
+            document.getElementById('job-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function confirmAction(e, defaultText, successText) {
+            const btn = e ? e.target : event.target;
+            btn.innerText = "Processing...";
+            
+            setTimeout(() => {
+                btn.innerText = "✓ " + successText;
+                btn.style.background = "var(--accent3)"; // Success color
+                btn.style.color = "#fff";
+                
+                setTimeout(() => {
+                    btn.closest('[id$="-modal"]').style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    btn.innerText = defaultText;
+                    btn.style.background = ""; // Restore original style
+                    btn.style.color = "";
+                }, 1500);
+            }, 1000);
+        }
 
         async function startAnalysis() {
 
